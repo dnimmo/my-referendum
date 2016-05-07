@@ -1,0 +1,86 @@
+<body>
+  <header>
+    <h1>My Referendum</h1>
+  </header>
+
+  {{>confirmation}}
+  {{>warning}}
+  {{>initial_question}}
+  {{>age_validity}}  
+  {{>location_validity}}
+</body>
+
+<template name="initial_question">
+  <div class="container" id='initialQuestion'>
+    {{votes}} 
+    <p class='question'>"Should the United Kingdom remain a member of the European Union or leave the European Union?"</p>
+    <form class="vote" id="voteForm">
+      <div class="optionSelect" id="stay">
+        <input id='voteStay' type="radio" name='voteOption' value='true'/><label for='voteStay'>Remain a member of the European Union</label>
+      </div>
+      <div class="optionSelect" id="leave">
+        <input id='voteLeave' type="radio" name='voteOption' value='true'/><label for='voteLeave'>Leave the European Union</label> 
+      </div>
+      
+      <p class='hidden infoMessage' id='thanks'>Thanks for voting! If you'd like to change your vote, just select the option you'd like to change to above</p>
+      <input type="submit" class='submit' value="Vote"/>
+      
+    </form>
+  </div>
+</template>
+
+<template name="age_validity">
+  <div id='validityAge' class='hidden container'>
+    <p class='question'>Are you aged between 16 and 25?</p>
+    <form class="vote" id="ageForm">
+      <div class="optionSelect">
+        <input id='ageYes' type="radio" name='voteOption' value='true'/><label for='ageYes'>Yes</label>
+      </div>
+      <div class="optionSelect">
+        <input id='ageNo' type="radio" name='voteOption' value='true'/><label for='ageNo'>No</label> 
+      </div>
+      
+      <input type="submit" class='submit' value="Vote"/>
+    </form>
+  </div>
+</template>
+
+<template name="location_validity">
+  <div id='validityLocation' class='hidden container'>
+    <p class='question'>Are you currently living in the North East of England?</p>
+    <form class="vote" id="locationForm">
+      <div class="optionSelect">
+        <input id='locationYes' type="radio" name='voteOption'/><label for='locationYes'>Yes</label>
+      </div>
+      <div class="optionSelect">
+        <input id='locationNo' type="radio" name='voteOption'/><label for='locationNo'>No</label> 
+      </div>
+      
+      <input type="submit" class='submit' value="Vote"/>
+    </form>
+  </div>
+</template>
+
+<template name="confirmation">
+  <div id='confirmation' class='hidden container'>
+    <p id='ageMessage' class='hidden'>Thanks for your interest in this issue, but we are only recording opinions of people aged 16 to 25 at this time. You can see the current results below</p>
+    <div id='results'>
+      {{> results}}
+    </div>
+  </div>
+</template>
+
+<template name="results">
+  <h2>Votes so far</h2>
+  <div id='stayResult'>
+    <p>Votes to remain <span>{{votesToStay}}</span></p>
+  </div>
+  <div id='leaveResult'>
+    <p>Votes to leave <span>{{votesToLeave}}</span></p>
+  </div>
+  <p id="voteAgainMessage" class="hidden">If you want to change your vote, you can do so by voting again, below</p>
+</template>
+
+<template name="warning">
+  <p class='hidden infoMessage warning'>Please select one of the options below</p>
+</template>
