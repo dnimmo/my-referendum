@@ -9,9 +9,6 @@ let inLocationRange
 let stayCount = 0
 let leaveCount = 0
 Template.results.helpers({
-  test() {
-    return "hello"
-  },
   votesToStay() {
     return Votes.find({"vote" : true, "inLocationRange" : true}).count()
   },
@@ -153,3 +150,22 @@ addVote = (vote) => {
     inLocationRange
   })
 }
+
+// fb stuff
+Template.login.events({
+    'click #facebook-login': function(event) {
+        Meteor.loginWithFacebook({}, function(err){
+            if (err) {
+                throw new Meteor.Error("Facebook login failed");
+            }
+        });
+    },
+ 
+    'click #logout': function(event) {
+        Meteor.logout(function(err){
+            if (err) {
+                throw new Meteor.Error("Logout failed");
+            }
+        })
+    }
+});
