@@ -4,6 +4,7 @@
 
 body {
   font-family: 'Oxygen', sans-serif;
+  background-color: #efefef;
   color: #30305d;
   font-weight: bold;
   position: absolute;
@@ -19,6 +20,7 @@ body {
   text-align: center; 
   max-width: 800px;
   margin: auto;
+  overflow-x: hidden;
 }
  
 @keyframes fadeIn {
@@ -30,6 +32,14 @@ body {
     margin-top: 0;
     opacity: 1;
   }
+}
+
+.avatar {
+    border: 2px solid #fff;
+    border-radius: 100px;
+    float: right;
+    margin-left: -52px;
+    margin-top: -10px;
 }
 
 .container {
@@ -78,9 +88,28 @@ h1 {
   margin: 0;
   margin-bottom: 10px;
   display: inline-block;
-  margin-right: 1em;
 }
  
+.login-info {
+    text-align: right;
+    padding: 5px;
+}
+
+.secondary-button {
+  background-color: #6b80dd;
+  border: 2px solid #fff;
+  box-shadow: 5px 5px 5px #e0e0e0;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px;
+  transition: all .1s linear;
+}
+
+.secondary-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 form {
   margin-top: 10px;
   margin-bottom: -10px;

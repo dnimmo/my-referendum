@@ -8,15 +8,39 @@ let inAgeRange
 let inLocationRange
 let stayCount = 0
 let leaveCount = 0
+
 Template.results.helpers({
   votesToStay() {
-    return Votes.find({"vote" : true, "inLocationRange" : true}).count()
+    return Votes.find({"vote" : true, "inLocationRange" : true, "inAgeRange" : true}).count()
   },
   votesToLeave() {
-    return Votes.find({"vote" : false, "inLocationRange" : true}).count()
-  }
+    return Votes.find({"vote" : false, "inLocationRange" : true, "inAgeRange" : true}).count()
+  },
 })
-
+Template.initial_question.helpers({
+    votedStay() {
+        const userID = document.getElementById('userID').innerText
+        if (Votes.find({"_id" : userID}).count() > 0) {            
+            return Votes.find({"_id" : document.getElementById('userID').innerText}).fetch()[0].vote   
+        } else {
+            return false
+        }
+    },
+    votedLeave() {
+        const userID = document.getElementById('userID').innerText
+        if (Votes.find({"_id" : userID}).count() > 0) {            
+            return !Votes.find({"_id" : document.getElementById('userID').innerText}).fetch()[0].vote   
+        } else {
+            return false
+        }
+    }
+})
+Template.body.helpers({
+    hasVoted() {
+      const userID = document.getElementById('userID').innerText
+      return Votes.find({"_id" : userID}).count() > 0 
+    }
+})
 Template.body.events({
   'submit #voteForm'(event) {
     event.preventDefault()
@@ -25,7 +49,12 @@ Template.body.events({
       removeClass('.warning', 'hidden')
     } else {
       removeSelected()
-      showAgeOptions()
+      if(hasVoted()) {
+        updateCount(stay)
+        displayOptions()
+      } else {
+        showAgeOptions()
+      }
     }
   },
   'submit #ageForm'(event) {
@@ -36,8 +65,9 @@ Template.body.events({
       removeSelected()
       showLocationOptions()
     } else {
+        console.log('test')
       removeSelected()
-      showConfirmation(false)
+      showConfirmation()
     }
   },
   'submit #locationForm'(event) {
@@ -112,17 +142,11 @@ showLocationOptions = () => {
   removeClass('#validityLocation', 'hidden')
 }
 
-showConfirmation = (metAgeCriteria = true) => {
+showConfirmation = () => {
   addClass('#validityAge', 'hidden')
   addClass('#validityLocation', 'hidden')
-  removeClass('#confirmation', 'hidden')
-  if(!metAgeCriteria) {
-    removeClass('#ageMessage', 'hidden')
-  } else {
-    updateCount(stay)
-    removeClass('#voteAgainMessage', 'hidden')
-    displayOptions()
-  }
+  updateCount(stay)
+  displayOptions()
 }
 
 displayOptions = () => {
@@ -143,12 +167,30 @@ checkIfSelected = (container) => {
   return isSelected.length !== 0
 }
 
+hasVoted = () => {
+    return document.getElementById('hasVoted').innerText
+}
+
 // db stuff
 addVote = (vote) => {
-  Votes.insert({
-    vote,
-    inLocationRange
-  })
+  const userID = document.getElementById('userID').innerText
+  let hasAlreadyVoted = Votes.find({"_id": userID}).count() > 0 ? true : false
+  if(hasAlreadyVoted) {
+    Votes.update({
+      '_id' : userID
+    }, {
+        $set : {
+          'vote' : vote
+        }
+      })
+  } else {    
+      Votes.insert({
+      vote,
+      inLocationRange,
+      inAgeRange,
+      '_id' : userID
+    })
+  }
 }
 
 // fb stuff
@@ -158,9 +200,11 @@ Template.login.events({
             if (err) {
                 throw new Meteor.Error("Facebook login failed");
             }
-        });
+        })
     },
- 
+})
+
+Template.user_info.events({
     'click #logout': function(event) {
         Meteor.logout(function(err){
             if (err) {
@@ -168,4 +212,4 @@ Template.login.events({
             }
         })
     }
-});
+})

@@ -1,34 +1,48 @@
 <body>
   <header>
     <h1>My Referendum</h1>
-  </header>
-  {{>login}}
-  {{>confirmation}}
-  {{>warning}}
-  {{>initial_question}}
-  {{>age_validity}}  
-  {{>location_validity}}
-</body>
-
-<template name="login">
     {{#if currentUser}}
-        {{currentUser.services.facebook.name}} -
-        {{currentUser.services.facebook.gender}}
-        <button id="logout">Logout</button>
-    {{else}}
-        <button id="facebook-login" class="btn btn-default"> Login with Facebook</button>
+        <span class='hidden' id='userID'>{{currentUser.services.facebook.id}}</span>
+        <img class='avatar' src="http://graph.facebook.com/{{currentUser.services.facebook.id}}/picture"/>
     {{/if}}
+  </header>
+  {{#if currentUser}}
+    <span class='hidden' id='hasVoted'>{{hasVoted}}</span>
+    {{>user_info}}
+    {{#if hasVoted}}
+      {{>confirmation}}
+    {{/if}}
+    {{>warning}}
+    {{>initial_question}}
+    {{>age_validity}}  
+    {{>location_validity}}
+  {{else}}
+    {{>login}}
+  {{/if}}
+</body>
+<template name="login">
+    <div class='container'>
+        <p class='question'>Some info here about what this app is for, and who it is for. Then a bit explaining that you need to log in with Facebook, and that we won't be recording any of your personal info.</p>
+        <button id="facebook-login" class="submit"> Log in with Facebook</button>
+    </div>
+</template>
+
+<template name="user_info">
+    <div class="login-info">
+        <span>Hello, {{currentUser.services.facebook.name}}!</span>
+        <button id="logout" class="secondary-button">Not you?</button>
+    </div>
+    
 </template>
 
 <template name="initial_question">
   <div class="container" id='initialQuestion'>
-    {{votes}} 
     <p class='question'>"Should the United Kingdom remain a member of the European Union or leave the European Union?"</p>
     <form class="vote" id="voteForm">
-      <div class="optionSelect" id="stay">
+      <div class="optionSelect {{#if votedStay}} selected {{/if}}" id="stay">
         <input id='voteStay' type="radio" name='voteOption' value='true'/><label for='voteStay'>Remain a member of the European Union</label>
       </div>
-      <div class="optionSelect" id="leave">
+      <div class="optionSelect {{#if votedLeave}} selected {{/if}}" id="leave">
         <input id='voteLeave' type="radio" name='voteOption' value='true'/><label for='voteLeave'>Leave the European Union</label> 
       </div>
       
@@ -72,7 +86,7 @@
 </template>
 
 <template name="confirmation">
-  <div id='confirmation' class='hidden container'>
+  <div id='confirmation' class='container'>
     <p id='ageMessage' class='hidden'>Thanks for your interest in this issue, but we are only recording opinions of people aged 16 to 25 at this time. You can see the current results below</p>
     <div id='results'>
       {{> results}}
@@ -88,7 +102,7 @@
   <div id='leaveResult'>
     <p>Votes to leave <span>{{votesToLeave}}</span></p>
   </div>
-  <p id="voteAgainMessage" class="hidden">If you want to change your vote, you can do so by voting again, below</p>
+  <p id="voteAgainMessage">Thanks for voting. If you want to change your vote, you can do so by voting again, below</p>
 </template>
 
 <template name="warning">
