@@ -11,10 +11,10 @@ let leaveCount = 0
 
 Template.results.helpers({
   votesToStay() {
-    return Votes.find({"vote" : true, "inLocationRange" : true, "inAgeRange" : true}).count()
+    return Votes.find({"vote" : true}).count()
   },
   votesToLeave() {
-    return Votes.find({"vote" : false, "inLocationRange" : true, "inAgeRange" : true}).count()
+    return Votes.find({"vote" : false}).count()
   },
 })
 Template.initial_question.helpers({
