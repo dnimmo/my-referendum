@@ -158,7 +158,7 @@ input[name='voteOption']{
   transition: all .3s linear;
 }
 
-.optionSelect.selected, .optionSelect:hover{
+.optionSelect:hover{
   background-color: #149671;
   font-weight: bold;
   transform: scale(1.1);
@@ -170,6 +170,13 @@ input[name='voteOption']{
 
 .optionSelect.selected:hover {
   cursor: normal;
+}
+
+.optionSelect.selected label:after {
+    color: #fff;
+    content: '✔';
+    font-size: 30px;
+    margin-left: 10px;
 }
 
 .hidden {
