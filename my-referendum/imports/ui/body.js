@@ -42,6 +42,10 @@ Template.body.helpers({
       } else {
           return false
       }
+    },
+    fbShareLink() {
+      const link = 'http://www.facebook.com/sharer/sharer.php?&u=' + window.location.href
+      return link
     }
 })
 Template.body.events({

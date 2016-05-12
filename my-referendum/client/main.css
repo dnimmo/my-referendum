@@ -36,16 +36,30 @@ a {
 }
 
 @font-face {
-    font-family: 'lemonYellowSun';
-    src: url('/fonts/lemonYellowSun.otf');
+  font-family: 'lemonYellowSun';
+  src: url('/fonts/lemonYellowSun.otf');
+}
+
+.fbLink {
+  background-color: #4267b2;
+  border: 1px solid;
+  border-color: #435a8b #3c5488 #334c83
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.fbLink:hover {
+  cursor: pointer;
 }
 
 .avatar {
-    border: 2px solid #fff;
-    border-radius: 100px;
-    float: right;
-    margin-left: -52px;
-    margin-top: -10px;
+  border: 2px solid #fff;
+  border-radius: 100px;
+  float: right;
+  margin-left: -52px;
+  margin-top: -10px;
 }
 
 .container {
@@ -66,7 +80,7 @@ a {
   border-radius: 5px;
   color: #fff;
   font-size: 20px;
-  padding: 10px;
+  padding: 5px 10px 20px 10px;
 }
 
 .warning {
