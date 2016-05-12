@@ -65,7 +65,6 @@ Template.body.events({
       removeSelected()
       showLocationOptions()
     } else {
-        console.log('test')
       removeSelected()
       showConfirmation()
     }
@@ -191,6 +190,7 @@ addVote = (vote) => {
       '_id' : userID
     })
   }
+  logVotes()
 }
 
 // fb stuff
@@ -213,3 +213,16 @@ Template.user_info.events({
         })
     }
 })
+
+// log votes for Jambo
+
+logVotes = () => {
+    console.clear()
+    console.log('Total votes:', Votes.find().count())
+    console.log('Total votes to stay, in age range and in North-East: ', Votes.find({'vote': true, 'inAgeRange': true, 'inLocationRange' : true}).count())
+    console.log('Total votes to leave, in age range and in North-East:', Votes.find({'vote': false, 'inAgeRange': true, 'inLocationRange' : true}).count())
+    console.log('Total votes to stay, out of age range: ', Votes.find({'vote': true, 'inAgeRange': false}).count())
+    console.log('Total votes to leave, out of age range: ', Votes.find({'vote': false, 'inAgeRange': false}).count())
+    console.log('Total votes to stay, in age range but out of North-East: ', Votes.find({'vote': true, 'inAgeRange': true, 'inLocationRange' : false}).count())
+    console.log('Total votes to leave, in age range but out of North-East: ', Votes.find({'vote': false, 'inAgeRange': true, 'inLocationRange' : false}).count())
+}
