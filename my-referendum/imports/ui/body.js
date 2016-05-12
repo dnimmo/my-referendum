@@ -22,28 +22,26 @@ Template.results.helpers({
     return votes
   }
 })
-Template.initial_question.helpers({
-    votedStay() {
-        const userID = document.getElementById('userID').innerText
-        if (Votes.find({"_id" : userID}).count() > 0) {            
-            return Votes.find({"_id" : document.getElementById('userID').innerText}).fetch()[0].vote   
-        } else {
-            return false
-        }
-    },
-    votedLeave() {
-        const userID = document.getElementById('userID').innerText
-        if (Votes.find({"_id" : userID}).count() > 0) {            
-            return !Votes.find({"_id" : document.getElementById('userID').innerText}).fetch()[0].vote   
-        } else {
-            return false
-        }
-    }
-})
 Template.body.helpers({
     hasVoted() {
       const userID = document.getElementById('userID').innerText
       return Votes.find({"_id" : userID}).count() > 0 
+    },    
+    votedStay() {
+      const userID = document.getElementById('userID').innerText
+      if (Votes.find({"_id" : userID}).count() > 0) {            
+          return Votes.find({"_id" : document.getElementById('userID').innerText}).fetch()[0].vote   
+      } else {
+          return false
+      }
+    },
+    votedLeave() {
+      const userID = document.getElementById('userID').innerText
+      if (Votes.find({"_id" : userID}).count() > 0) {            
+          return !Votes.find({"_id" : document.getElementById('userID').innerText}).fetch()[0].vote   
+      } else {
+          return false
+      }
     }
 })
 Template.body.events({

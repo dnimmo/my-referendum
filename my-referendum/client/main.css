@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #efefef;
+  background-color: #fff;
   bottom: 0;
   color: #30305d;
   font-family: 'Oxygen', sans-serif;
@@ -210,6 +210,21 @@ header .hide-completed {
  
 .toggle-private {
   margin-left: 5px;
+}
+ 
+ footer {
+   border-top: 2px solid #1f8fc1;
+   padding-bottom: 25px;
+   padding-top: 25px;
+ }
+ 
+ footer a {
+  font-size: 18px;
+ }
+ 
+.footerLogo {
+  height: 206px;
+  width: 300px;
 }
  
 @media screen and (min-width: 800px) {
