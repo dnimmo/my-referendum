@@ -46,7 +46,7 @@ body {
 
 .container {
   animation: fadeIn 2s;
-  font-size: 30px;
+  font-size: 20px;
   padding: 10px;
 }
 
@@ -62,10 +62,6 @@ body {
   color: #fff;
   font-size: 20px;
   padding: 10px;
-}
-
-.question {
-  font-size: 30px;
 }
 
 .warning {
@@ -216,3 +212,8 @@ header .hide-completed {
   margin-left: 5px;
 }
  
+@media screen and (min-width: 800px) {
+  .container {
+    font-size: 30px;
+  }
+}
