@@ -104,7 +104,10 @@ Template.body.events({
   'click #locationNo'(event) {
     handleSelection(event)
     inLocationRange = false
-  }  
+  },
+  'click #confirmation'(event) {
+    logVotes()
+  }
 })
 
 handleSelection = (event) => {
