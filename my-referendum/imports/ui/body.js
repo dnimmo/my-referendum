@@ -16,6 +16,11 @@ Template.results.helpers({
   votesToLeave() {
     return Votes.find({"vote" : false}).count()
   },
+  totalVotes() {
+    let votes = Votes.find().count().toString()
+    votes = votes.replace(new RegExp("^(\\d{" + (votes.length%3?votes.length%3:0) + "})(\\d{3})", "g"), "$1 $2").trim().replace(/(\d{3})+?/gi, " , $1").trim()
+    return votes
+  }
 })
 Template.initial_question.helpers({
     votedStay() {
