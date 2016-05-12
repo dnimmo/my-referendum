@@ -29,9 +29,10 @@
 </body>
 <template name="login">
     <div class='container'>
-        <p class='question'>We want to create a space for 16-25-year-olds to have their say on the EU Referendum, separate from what is happening nationally.</p>
-        <p>With our EU Referendum for Young People you have until June 16 to cast your vote. Once you've voted, you may change your vote at any time up until 16 June.</p>
-        <p>Log in with Facebook below to begin voting, none of your personal information will be kept by us or given to anyone else. My Referendum is a project delivered by Youth Focus: North East and funded by the Ballinger Charitable Trust.</p>
+        <p class='question'>We would like to get the views of 16-25-year-olds on whether the UK should remain a member of the European Union. There is a danger that the voices of young people are being overlooked.</p>
+        <p>With our EU Referendum for Young People you have until 16 June to cast your vote on whether you would like the UK to remain or leave.</p>
+        <p>Log in with Facebook below to begin voting. None of your personal information will be kept by us or given to anyone else.</p>
+        <p>Results will be released on 24 June on <a href='www.mymanifesto.org.uk' target='_blank'>mymanifesto.org.uk</a></p>
         <button id="facebook-login" class="submit">Log in with Facebook</button>
     </div>
 </template>
@@ -96,7 +97,6 @@
 
 <template name="confirmation">
   <div id='confirmation' class='container'>
-    <p id='ageMessage' class='hidden'>Thanks for your interest in this issue, but we are only recording opinions of people aged 16 to 25 at this time. You can see the current results below</p>
     <div id='results'>
       {{> results}}
     </div>
@@ -203,5 +203,6 @@
         <a href='http://www.ballingercharitabletrust.org.uk/' target='_blank'>
           <img src='/images/ballinger.jpg' class='footerLogo'/>    
         </a>
+        <p>This work is not funded by any remain or leave parties or campaigns.</p>
     </footer>    
 </template>
