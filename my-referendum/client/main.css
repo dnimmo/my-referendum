@@ -256,5 +256,6 @@ header .hide-completed {
 @media screen and (min-width: 800px) {
   .container {
     font-size: 30px;
+    line-height: 2.5rem;
   }
 }
