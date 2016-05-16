@@ -94,6 +94,7 @@ header {
   color: #fff;
   padding: 20px 15px 15px 15px;
   position: relative;
+  text-align: left;
 }
  
 #login-buttons {
@@ -251,6 +252,12 @@ header .hide-completed {
 .footerLogo {
   height: 103px;
   width: 150px;
+}
+ 
+@media screen and (min-width: 335px) {
+  header {
+    text-align: center;
+  }
 }
  
 @media screen and (min-width: 800px) {

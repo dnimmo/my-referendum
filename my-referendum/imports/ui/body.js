@@ -169,9 +169,7 @@ checkIfSelected = (container) => {
   return isSelected.length !== 0
 }
 
-hasVoted = () => {
-    return document.getElementById('hasVoted').innerText
-}
+hasVoted = () => document.getElementById('hasVoted').innerText
 
 // db stuff
 addVote = (vote) => {
@@ -219,13 +217,21 @@ Template.user_info.events({
 
 // log votes for Jambo
 
+getTotalVotes = () => Votes.find().count()
+getStayVotesInRangeAndInLocation = () => Votes.find({'vote': true, 'inAgeRange': true, 'inLocationRange' : true}).count()
+getLeaveVotesInRangeAndInLocation = () => Votes.find({'vote': false, 'inAgeRange': true, 'inLocationRange' : true}).count()
+getStayVotesOutOfRange = () => Votes.find({'vote': true, 'inAgeRange': false}).count()
+getLeaveVotesOutOfRange = () => Votes.find({'vote': false, 'inAgeRange': false}).count()
+getStayVotesInRangeButOutOfLocation = () => Votes.find({'vote': true, 'inAgeRange': true, 'inLocationRange' : false}).count()
+getTotalVotesOutOfLocation = () => Votes.find({'vote': false, 'inAgeRange': true, 'inLocationRange' : false}).count()
+
 logVotes = () => {
     console.clear()
-    console.log('Total votes:', Votes.find().count())
-    console.log('Total votes to stay, in age range and in North-East: ', Votes.find({'vote': true, 'inAgeRange': true, 'inLocationRange' : true}).count())
-    console.log('Total votes to leave, in age range and in North-East:', Votes.find({'vote': false, 'inAgeRange': true, 'inLocationRange' : true}).count())
-    console.log('Total votes to stay, out of age range: ', Votes.find({'vote': true, 'inAgeRange': false}).count())
-    console.log('Total votes to leave, out of age range: ', Votes.find({'vote': false, 'inAgeRange': false}).count())
-    console.log('Total votes to stay, in age range but out of North-East: ', Votes.find({'vote': true, 'inAgeRange': true, 'inLocationRange' : false}).count())
-    console.log('Total votes to leave, in age range but out of North-East: ', Votes.find({'vote': false, 'inAgeRange': true, 'inLocationRange' : false}).count())
+    console.log('Total votes:', getTotalVotes())
+    console.log('Total votes to stay, in age range and in North-East: ', getStayVotesInRangeAndInLocation())
+    console.log('Total votes to leave, in age range and in North-East:', getLeaveVotesInRangeAndInLocation())
+    console.log('Total votes to stay, out of age range: ', getStayVotesOutOfRange())
+    console.log('Total votes to leave, out of age range: ', getLeaveVotesOutOfRange())
+    console.log('Total votes to stay, in age range but out of North-East: ', getStayVotesInRangeButOutOfLocation())
+    console.log('Total votes to leave, in age range but out of North-East: ', getTotalVotesOutOfLocation())
 }
