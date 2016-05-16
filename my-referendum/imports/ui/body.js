@@ -6,8 +6,6 @@ import './body.html'
 let stay
 let inAgeRange
 let inLocationRange
-let stayCount = 0
-let leaveCount = 0
 
 Template.results.helpers({
   votesToStay() {
@@ -163,11 +161,6 @@ displayOptions = () => {
 }
 
 updateCount = (stayVote) => {
-  if(stayVote) {
-    stayCount += 1
-  } else {
-    leaveCount += 1
-  }
   addVote(stayVote)
 }
 
